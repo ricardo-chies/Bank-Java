@@ -1,0 +1,11 @@
+CREATE TABLE clientes (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    cpf VARCHAR(11) UNIQUE NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    idade INT NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(100) NOT NULL,
+    ind_ativo TINYINT NOT NULL,
+    PRIMARY KEY (id)
+);
