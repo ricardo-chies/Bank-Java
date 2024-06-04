@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService implements IClienteService {
@@ -17,14 +18,21 @@ public class ClienteService implements IClienteService {
     @Autowired
     private IClienteRepository repository;
 
-    public void CadastrarCliente(@Valid ClienteDto clienteDto) {
+    public Long CadastrarCliente(@Valid ClienteDto clienteDto) {
         Cliente cliente = new Cliente(clienteDto);
-        repository.save(cliente);
+        Cliente clienteSalvo = repository.save(cliente);
+        return clienteSalvo.getId();
     }
 
     @Override
     public List<ClienteDto> ListarClientes() {
         return repository.findAll().stream().map(ClienteDto::new).toList();
+    }
+
+    @Override
+    public ClienteDto LoginCliente(String cpf, String senha) {
+        Optional<Cliente> cliente = repository.LoginCliente(cpf, senha);
+        return cliente.map(ClienteDto::new).orElse(null);
     }
 
     @Override

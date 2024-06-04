@@ -19,6 +19,7 @@ public class ContaController {
     @Autowired
     private IContaService service;
 
+    @CrossOrigin
     @PostMapping
     @Transactional
     public ResponseDto CadastrarConta(@RequestBody ContaDto contaDto) {
@@ -30,6 +31,7 @@ public class ContaController {
         }
     }
 
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<?> ListarContas() {
         try {
@@ -41,6 +43,7 @@ public class ContaController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<?> ContaCliente(@PathVariable Long id) {
         try {
@@ -52,6 +55,7 @@ public class ContaController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("/extrato/{id}")
     public ResponseEntity<?> ExtratoCliente(@PathVariable Long id) {
         try {
@@ -63,6 +67,7 @@ public class ContaController {
         }
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     @Transactional
     public ResponseDto InativarConta(@PathVariable Long id){
@@ -74,6 +79,7 @@ public class ContaController {
         }
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseDto ExcluirContaCliente(@PathVariable Long id){

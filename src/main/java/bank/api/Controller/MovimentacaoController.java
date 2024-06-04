@@ -18,6 +18,7 @@ public class MovimentacaoController {
     @Autowired
     private IMovimentacaoService service;
 
+    @CrossOrigin
     @PostMapping
     @Transactional
     public ResponseDto RealizarMovimentacao(@RequestBody MovimentacaoDto movimentacaoDto) {
@@ -29,6 +30,7 @@ public class MovimentacaoController {
         }
     }
 
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<?> ListarMovimentacoes() {
         try {
@@ -40,6 +42,7 @@ public class MovimentacaoController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<?> ListarMovimentacoesCliente(@PathVariable Long id) {
         try {

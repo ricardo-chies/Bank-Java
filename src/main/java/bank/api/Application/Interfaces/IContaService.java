@@ -1,5 +1,6 @@
 package bank.api.Application.Interfaces;
 
+import bank.api.Application.Dto.Cliente.ClienteDto;
 import bank.api.Application.Dto.Conta.ContaDto;
 import bank.api.Application.Dto.Movimentacao.MovimentacaoDto;
 import jakarta.validation.Valid;

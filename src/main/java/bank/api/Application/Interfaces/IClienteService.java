@@ -7,9 +7,9 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 public interface IClienteService {
-    void CadastrarCliente(@Valid ClienteDto clienteDto);
+    Long CadastrarCliente(@Valid ClienteDto clienteDto);
     List<ClienteDto> ListarClientes();
-
+    ClienteDto LoginCliente(String cpf, String Senha);
     void AtualizarCadastroCliente(@Valid AtualizaClienteDto clienteDto);
     void InativarCliente(Long id);
     void ExcluirCadastroCliente(Long id);

@@ -2,6 +2,8 @@ package bank.api.Controller;
 
 import bank.api.Application.Dto.Cliente.AtualizaClienteDto;
 import bank.api.Application.Dto.Cliente.ClienteDto;
+import bank.api.Application.Dto.Cliente.LoginDto;
+import bank.api.Application.Dto.Cliente.ResponseCadastroClienteDto;
 import bank.api.Application.Dto.ResponseDto;
 import bank.api.Application.Interfaces.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +21,19 @@ public class ClienteController {
     @Autowired
     private IClienteService service;
 
+    @CrossOrigin
     @PostMapping
     @Transactional
-    public ResponseDto CadastrarCliente(@RequestBody ClienteDto clienteDto) {
+    public ResponseCadastroClienteDto CadastrarCliente(@RequestBody ClienteDto clienteDto) {
         try {
-            service.CadastrarCliente(clienteDto);
-            return new ResponseDto(true, "Cliente cadastrado realizado com sucesso");
+            Long clienteId = service.CadastrarCliente(clienteDto);
+            return new ResponseCadastroClienteDto(true, clienteId);
         } catch (Exception e) {
-            return new ResponseDto(false, "Erro ao cadastrar cliente: " + e.getMessage());
+            return new ResponseCadastroClienteDto(false, null);
         }
     }
 
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<?> ListarClientes() {
         try {
@@ -41,6 +45,19 @@ public class ClienteController {
         }
     }
 
+    @CrossOrigin
+    @PostMapping("/login")
+    public ResponseEntity<?> loginCliente(@RequestBody LoginDto login) {
+        try {
+            ClienteDto cliente = service.LoginCliente(login.cpf(), login.senha());
+            return ResponseEntity.ok(cliente);
+        } catch (Exception e) {
+            ResponseDto errorResponse = new ResponseDto(false, "Erro ao realizar login " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+
+    @CrossOrigin
     @PutMapping()
     @Transactional
     public ResponseDto AtualizarCadastroCliente(@RequestBody AtualizaClienteDto clienteDto){
@@ -52,6 +69,7 @@ public class ClienteController {
         }
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     @Transactional
     public ResponseDto InativarCliente(@PathVariable Long id){
@@ -63,6 +81,7 @@ public class ClienteController {
         }
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseDto ExcluirCadastroCliente(@PathVariable Long id){

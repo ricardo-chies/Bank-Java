@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 public record ClienteDto(
+        Long id,
         @NotBlank
         @Pattern(regexp = "\\d{11}")
         String cpf,
@@ -20,6 +21,6 @@ public record ClienteDto(
         String senha){
 
         public ClienteDto(Cliente cliente) {
-                this(cliente.getCpf(), cliente.getNome(), cliente.getIdade(), cliente.getTelefone(), cliente.getEmail(), cliente.getSenha());
+                this(cliente.getId(), cliente.getCpf(), cliente.getNome(), cliente.getIdade(), cliente.getTelefone(), cliente.getEmail(), cliente.getSenha());
         }
 }
