@@ -10,6 +10,7 @@ Detalhes da Aplicação:
   <li>Clean Arquitecture</li>
   <li>Padrão DTO via Java Records</li>
   <li>Mapeamento de entidade JPA com interface repository</li>
+  <li>Conexão com banco de dados MySql</li>
   <li>Flyway como ferramenta de migrations.</li>
   <li>Validações com Bean Validation.</li>
   <li>Configuração CORS</li>
